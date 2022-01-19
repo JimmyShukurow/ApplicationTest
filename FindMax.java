@@ -47,6 +47,8 @@ class FindMax extends GivenArrayToPyramid{
         Map<Integer, List<Integer>> temporaryanswers = new HashMap<>();
         Map<Integer, List<Integer>> answers = new HashMap<>();
         List<Integer> list = new ArrayList<>();
+        Iterator<Integer> iterator;
+
         list.add(given[0][0]);
         answers.put(0, list);
 
@@ -54,10 +56,10 @@ class FindMax extends GivenArrayToPyramid{
            for(int j =0; j < given[i].length; j++){
                list =new ArrayList<>();
                if( j < given[i-1].length ) {
-                    if(j > 0) list.add(given[i][j]+given[i-1][j-1]);
-                    list.add(given[i][j]+given[i-1][j]);
+                    if(j > 0) list.add(given[i][j]+answers.get(j-1).get(0));
+                    list.add(given[i][j]+answers.get(j).get(0));
                }else{
-                    if(j > 0) list.add(given[i][j]+given[i-1][j-1]);
+                    if(j > 0) list.add(given[i][j]+answers.get(j-1).get(0));
                }
                 temporaryanswers.put(j, list);
            }
