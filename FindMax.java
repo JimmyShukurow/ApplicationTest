@@ -21,19 +21,19 @@ class FindMax extends GivenArrayToPyramid{
         System.out.println(maxSequence(triangle));
     }
 
-    public static int factorial(int k){ 
-        if (k ==1) return 1;
+    // public static int factorial(int k){ 
+    //     if (k ==1) return 1;
 
-        return k* factorial(k-1);
-    }
+    //     return k* factorial(k-1);
+    // }
 
-    public static int maximumNumber(int[] givenArray){
-        int max = 0;
-        for(int i = 0; i < givenArray.length; i++){
-            max = givenArray[i] > max ? givenArray[i] : max;
-        }
-        return max;
-    }
+    // public static int maximumNumber(int[] givenArray){
+    //     int max = 0;
+    //     for(int i = 0; i < givenArray.length; i++){
+    //         max = givenArray[i] > max ? givenArray[i] : max;
+    //     }
+    //     return max;
+    // }
 
     public static boolean isPrime(int k){
         for(int i = 2; i <= k/2; i++){
@@ -47,7 +47,6 @@ class FindMax extends GivenArrayToPyramid{
         Map<Integer, List<Integer>> temporaryanswers = new HashMap<>();
         Map<Integer, List<Integer>> answers = new HashMap<>();
         List<Integer> list = new ArrayList<>();
-        Iterator<Integer> iterator;
 
         list.add(given[0][0]);
         answers.put(0, list);
@@ -56,10 +55,29 @@ class FindMax extends GivenArrayToPyramid{
            for(int j =0; j < given[i].length; j++){
                list =new ArrayList<>();
                if( j < given[i-1].length ) {
-                    if(j > 0) list.add(given[i][j]+answers.get(j-1).get(0));
-                    list.add(given[i][j]+answers.get(j).get(0));
+                    if(j > 0){
+                        if(given[i][j] == 0){
+                            list.add(0);
+                        }else{
+                            for(int nums: answers.get(j-1)){
+                                if(nums == 0 ){
+                                    list.add(0);
+                                }else{
+                                    list.add(given[i][j]+ nums);
+                                }
+                            }
+                        }
+                    }
+                    
+                    for(int nums: answers.get(j)){
+                        list.add(given[i][j]+ nums);
+                    }
                }else{
-                    if(j > 0) list.add(given[i][j]+answers.get(j-1).get(0));
+                    if(j > 0) {
+                        for(int nums: answers.get(j-1)){
+                            list.add(given[i][j]+nums);
+                        }
+                    }
                }
                 temporaryanswers.put(j, list);
            }
