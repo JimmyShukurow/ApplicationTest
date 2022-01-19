@@ -17,7 +17,6 @@ class FindMax extends GivenArrayToPyramid{
             }
         }
         // System.out.println("Sayi Prime'my: " + isPrime(number)); 
-        toPyramid(triangle);
         System.out.println(maxSequence(triangle));
     }
 
@@ -41,6 +40,16 @@ class FindMax extends GivenArrayToPyramid{
         }
         if(k == 1 ) return false;
         return true;
+    }
+
+    public static int maximumNumber(Map<Integer, List<Integer>> map){
+        int max = 0;
+        for(int i = 0; i < map.size(); i++){
+            for(int nums: map.get(i)){
+                max = nums > max ? nums : max;
+            }
+        }
+        return max;
     }
 
     public static int maxSequence(int[][] given){
@@ -68,16 +77,31 @@ class FindMax extends GivenArrayToPyramid{
                             }
                         }
                     }
-                    
-                    for(int nums: answers.get(j)){
-                        list.add(given[i][j]+ nums);
-                    }
-               }else{
-                    if(j > 0) {
-                        for(int nums: answers.get(j-1)){
-                            list.add(given[i][j]+nums);
+                    if(given[i][j] == 0){
+                        list.add(0);
+                    }else{
+                        for(int nums: answers.get(j)){
+                            if(nums == 0){
+                                list.add(0);
+                            }else{
+                                list.add(given[i][j]+ nums);
+                            }
                         }
                     }
+               }else{
+                   if(given[i][j] == 0){
+                       list.add(0);
+                   }else{
+                        if(j > 0) {
+                            for(int nums: answers.get(j-1)){
+                                if(nums == 0){
+                                    list.add(0);
+                                }else{
+                                    list.add(given[i][j]+nums);
+                                }
+                            }
+                        }
+                   }
                }
                 temporaryanswers.put(j, list);
            }
@@ -87,7 +111,7 @@ class FindMax extends GivenArrayToPyramid{
         }
        
         System.out.println(answers);
-        return answers.get(0).get(0);  
+        return maximumNumber(answers); 
 
     }
 }
