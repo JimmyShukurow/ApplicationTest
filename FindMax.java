@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-class FindMax extends GivenArrayToPyramid{
+class FindMax {
 
     public static void main (String args[]){
         List<Integer> list = new ArrayList<Integer>();
@@ -36,24 +36,17 @@ class FindMax extends GivenArrayToPyramid{
             } catch (IOException e) {
             }
         }
-        System.out.println(list.get(3));
-        System.out.println(height);
-
-
-        // Scanner scanner = new Scanner(System.in);
-        // int height;
-        // System.out.print("Yuksekligi gir: ");
-        // height = scanner.nextInt();
-        // int[][] triangle = new int[height][];
-        // for(int i = 0; i < height; i++){
-        //     triangle[i] = new int[i+1];
-        //     for(int j = 0; j <= i; j++){
-        //         System.out.print("triangle["+i+"]["+j+"]: ");
-        //         int number = scanner.nextInt();
-        //         triangle[i][j] =  isPrime(number) ? 0 : number;
-        //     }
-        // }
-        // System.out.println(maxSequence(triangle));
+       int counter = 0;
+        int[][] triangle = new int[height][];
+        for(int i = 0; i < height; i++){
+            triangle[i] = new int[i+1];
+            for(int j = 0; j <= i; j++){
+                int number = list.get(counter);
+                triangle[i][j] =  isPrime(number) ? 0 : number;
+                counter++;
+            }
+        }
+        System.out.println("Maximum is: " + maxSequence(triangle));
     }
 
 
@@ -134,7 +127,6 @@ class FindMax extends GivenArrayToPyramid{
            answers.putAll(temporaryanswers);
            temporaryanswers.clear();
         }
-       
         return maximumNumber(answers); 
 
     }
